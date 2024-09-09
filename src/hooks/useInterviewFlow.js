@@ -9,14 +9,14 @@ const useInterviewFlow = () => {
   };
 
   const sendMessage = async (userMessage) => {
-    addMessage({ text: userMessage, sender: 'User' });
+    addMessage({ text: userMessage, sender: 'user' });
 
     try {
       const aiResponse = await sendMessageToOpenAI(userMessage);
-      addMessage({ text: aiResponse, sender: 'AI' });
+      addMessage({ text: aiResponse, sender: 'ai' });
     } catch (error) {
       console.error('Error sending message to OpenAI:', error);
-      addMessage({ text: 'Error: AI could not respond.', sender: 'AI' });
+      addMessage({ text: 'Error: AI could not respond.', sender: 'ai' });
     }
   };
 

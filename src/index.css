@@ -76,6 +76,58 @@ textarea:focus {
 	box-shadow: 0px 0px 20px -10px rgb(60 62 134);
 }
 
+.interview-page .ai-recruiter-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -100px;
+}
+
+.chat-wrapper{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 75px;
+	padding-bottom: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.chat-box .message {
+	margin-bottom: 10px;
+}
+.chat-box .message p {
+	font-size: 12px;
+	color: #8c8eae;
+}
+.chat-box .msg-ai p {
+	color: #000;
+}
+.chat-box .message span {
+	font-size: 14px;
+	color: #a3a5ca;
+}
+.chat-box .msg-ai span {
+	color: #7478ee;
+}
+
+.go-back-btn {
+	color: #7478ee;
+	border-bottom: 1px solid;
+	border-color: #7478ee;
+	transition: 0.1s;
+	position: fixed;
+	top: 0;
+	left: 50px;
+	font-size: 12px;
+}
+.go-back-btn:hover {
+	border-color: transparent;
+}
+
 @keyframes mulShdSpin {
   0%,
   100% {
