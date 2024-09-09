@@ -1,0 +1,90 @@
+
+.ai-recruiter-wrapper {
+	position: relative;
+	width: 200px;
+	height: 200px;
+}
+.ai-recruiter-wrapper .circle{
+	position: absolute;
+	top: 50%;
+  left: 50%;
+	height: 120px;
+	width: 120px;
+	margin-top: -60px;
+	margin-left: -60px;
+	z-index: 1;
+}
+.ai-recruiter{
+	top: 0;
+  left: 0;
+	z-index: 0;
+	width: 200px;
+	height: 200px;
+}
+.ai-recruiter svg {
+  height: 100%;
+	width: 100%;
+}
+
+.ai-recruiter-wrapper svg g {
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.ai-recruiter-wrapper #a {
+  animation: clockwise 8s linear infinite;
+
+}
+
+.ai-recruiter-wrapper #b {
+  animation: clockwise 10s linear infinite;
+}
+
+.ai-recruiter-wrapper #d {
+  animation: clockwise 12s linear infinite;
+}
+
+.ai-recruiter-wrapper #f {
+  animation: clockwise 9s linear infinite;
+}
+
+.ai-recruiter-wrapper #c {
+  animation: anticlockwise 9s linear infinite;
+}
+
+.ai-recruiter-wrapper #e {
+  animation: anticlockwise 11s linear infinite;
+}
+
+
+/* for 0 to 360deg rotation */
+@keyframes clockwise {
+  from {
+    transform: rotatez(0deg);
+
+  }
+
+  to {
+    transform: rotatez(360deg);
+  }
+}
+
+/* for 0 to -360deg rotation */
+@keyframes anticlockwise {
+  from {
+    transform: rotatez(0deg);
+
+  }
+
+  to {
+    transform: rotatez(-360deg);
+  }
+}
+
+/* for smart-phone */
+@media only screen and (max-width: 600px) {
+  .ai-recruiter-wrapper svg {
+    width: fit-content;
+    margin: 10px;
+  }
+}
