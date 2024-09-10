@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-const MicInput = ({ onSend, language }) => {
+const MicInput = forwardRef(({ onSend, language = 'en-US' }, ref) => {
   const [isListening, setIsListening] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const { transcript, resetTranscript } = useSpeechRecognition();
+	const timeoutSeconds = import.meta.env.VITE_RECORDING_TIMEOUT || 2;
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return <div>Your browser does not support speech recognition.</div>;
   }
+	
+  useImperativeHandle(ref, () => ({
+    startListening() {
+      handleStartListening();
+    }
+  }));
 
   const handleStartListening = () => {
     setIsListening(true);
     resetTranscript();
     SpeechRecognition.startListening({ continuous: true, language });
-    startTranscriptTimer();
   };
 
   const handleStopListening = () => {
@@ -31,13 +37,17 @@ const MicInput = ({ onSend, language }) => {
     
     const id = setTimeout(() => {
       return handleStopListening();
-    }, 3000);
+    }, timeoutSeconds * 1000);
 
     setTimeoutId(id);
   };
 
+	const makeSummary = () => {
+		handleStopListening();
+	}
+
   useEffect(() => {
-    if (isListening) {
+    if (isListening && transcript.length > 0) {
       startTranscriptTimer();
     }
 
@@ -46,16 +56,24 @@ const MicInput = ({ onSend, language }) => {
     };
   }, [transcript]);
 
-  return (
-    <div className="mic-input">
-      <button
-        onClick={isListening ? handleStopListening : handleStartListening}
-        className={`button ${isListening ? 'listening' : ''}`}
-      >
-        {isListening ? 'Stop Recording' : 'Start Recording'}
-      </button>
-    </div>
-  );
-};
+	if(isListening){
+		return (
+			<div className="mic-input mt-[30px]">
+				<button
+					className="button button-listening listening"
+				>
+					<span>Recording...</span>
+				</button>
+
+				<button
+					onClick={makeSummary}
+					className="button button-done mt-3"
+				>
+					Done answering? Continue
+				</button>
+			</div>
+		);
+	}
+});
 
 export default MicInput;

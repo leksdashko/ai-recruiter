@@ -24,7 +24,7 @@ const HomePage = () => {
     } else {
       setErrorMessage('');
 			
-      navigate('/interview', { state: { jobDescription } });
+      navigate('/interview', { state: { jobDescription, language } });
     }
   };
 

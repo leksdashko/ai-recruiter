@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { sendMessageToOpenAI } from '../api/openai';
 
-const useInterviewFlow = () => {
+const useInterviewFlow = (onAISuccess) => {
   const [messages, setMessages] = useState([]);
 	
   const addMessage = (message) => {
@@ -14,10 +14,18 @@ const useInterviewFlow = () => {
     try {
       const aiResponse = await sendMessageToOpenAI(userMessage);
       addMessage({ text: aiResponse, sender: 'ai' });
+
+      // if (onAISuccess) {
+      //   onAISuccess(); // Trigger the callback to start listening again
+      // }
     } catch (error) {
       console.error('Error sending message to OpenAI:', error);
       addMessage({ text: 'Error: AI could not respond.', sender: 'ai' });
     }
+
+		if (onAISuccess) {
+			onAISuccess();
+		}
   };
 
   return { messages, sendMessage, addMessage };

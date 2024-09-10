@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ChatBox from '../components/ChatBox';
 import MicInput from '../components/MicInput';
@@ -11,12 +11,15 @@ const InterviewPage = () => {
   const { jobDescription, language } = location.state || {};
 	const [hasError, setError] = useState(false);
 	const navigate = useNavigate();
+  const micRef = useRef();
 
-  const { messages, sendMessage, addMessage } = useInterviewFlow();
+  const { messages, sendMessage, addMessage } = useInterviewFlow(() => {
+    micRef.current.startListening();
+  });
 
 	useEffect(() => {
-		if(!jobDescription) return navigate('/');
-	},[]);
+		if (!jobDescription) return navigate('/');
+	}, []);
 
   useEffect(() => {
     const analyzeJobDescription = async () => {
@@ -28,12 +31,14 @@ const InterviewPage = () => {
         console.error('Error sending job description to OpenAI:', error);
         addMessage({ text: 'There was an error processing your request.', sender: 'ai' });
       }
+
+			micRef.current.startListening();
     };
 
 		if(!hasError){
 			analyzeJobDescription();
 		}
-  }, [jobDescription, addMessage]);
+  }, [jobDescription, addMessage, setError]);
 
 	const goBack = () => {
 		return navigate('/', { state: { backJobDescription: jobDescription } });
@@ -46,10 +51,8 @@ const InterviewPage = () => {
 				<RecruiterAvatar />
 
 				<div className="chat-wrapper">
-					<div className="">
-						<ChatBox messages={messages} />
-						<MicInput onSend={sendMessage} language={language} />
-					</div>
+					<ChatBox messages={messages} />
+					<MicInput ref={micRef} onSend={sendMessage} language={language} />
 				</div>
 			</div>
 		</div>
