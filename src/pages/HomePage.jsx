@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { styles } from "../styles";
 import RecruiterAvatar from "../components/Avatar/RecruiterAvatar"; 
+import { generateVoice } from '../api/11labs';
+import axios from 'axios';
 
 const HomePage = () => {
 	const location = useLocation();
@@ -27,6 +29,51 @@ const HomePage = () => {
       navigate('/interview', { state: { jobDescription, language } });
     }
   };
+
+	const startStreaming = async () => {
+		const voiceId = "21m00Tcm4TlvDq8ikWAM";
+		const text = "Hello, this is a sample text to stream as speech.";
+		const apiKey = import.meta.env.VITE_LABS_API_KEY;
+		const voiceSettings = {
+			stability: 0,
+			similarity_boost: 0,
+		};
+
+		const baseUrl = "https://api.elevenlabs.io/v1/text-to-speech";
+    const headers = {
+      "Content-Type": "application/json",
+      "xi-api-key": apiKey,
+    };
+
+    const requestBody = {
+      text,
+      voice_settings: voiceSettings,
+    };
+
+    try {
+      const response = await axios.post(`${baseUrl}/${voiceId}`, requestBody, {
+        headers,
+        responseType: "blob",
+      });
+
+			console.log(response);
+
+      if (response.status === 200) {
+				console.log(URL.createObjectURL(response.data));
+        const audio = new Audio(URL.createObjectURL(response.data));
+        audio.play();
+      } else {
+        // setError("Error: Unable to stream audio.");
+      }
+    } catch (error) {
+			console.error(error);
+      // setError("Error: Unable to stream audio.");
+    } finally {
+      // setLoading(false);
+    }
+	}
+	
+
 
   return (
     <div className={`absolute inset-0 top-[75px]  max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}>
@@ -61,6 +108,13 @@ const HomePage = () => {
 						<button
 							onClick={handleStart}
 							className="button bg-[#868af2] hover:bg-[#696cc6] mt-3"
+						>
+							Start Interview
+						</button>
+
+						<button
+							onClick={startStreaming}
+							className="button bg-[#000] hover:bg-[#696cc6] mt-3"
 						>
 							Start Interview
 						</button>

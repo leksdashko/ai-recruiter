@@ -5,6 +5,7 @@ import MicInput from '../components/MicInput';
 import RecruiterAvatar from '../components/Avatar/RecruiterAvatar';
 import useInterviewFlow from '../hooks/useInterviewFlow';
 import { sendJobDescriptionToOpenAI } from '../api/openai';
+import { generateVoice } from '../api/11labs';
 
 const InterviewPage = () => {
   const location = useLocation();
@@ -26,20 +27,24 @@ const InterviewPage = () => {
       try {
         // const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
 				const aiResponse = 'Hi, I am your interviewer';
-        addMessage({ text: aiResponse, sender: 'ai' });
+
+				generateVoice(aiResponse, () => {
+					addMessage({ text: aiResponse, sender: 'ai' });
+
+					micRef.current.startListening();
+				});
+				
       } catch (error) {
 				setError(true);
         console.error('Error sending job description to OpenAI:', error);
         addMessage({ text: 'There was an error processing your request.', sender: 'ai' });
       }
-
-			micRef.current.startListening();
     };
 
 		if(!hasError){
 			analyzeJobDescription();
 		}
-  }, [jobDescription, addMessage, setError]);
+  }, []);
 
 	const goBack = () => {
 		return navigate('/', { state: { backJobDescription: jobDescription } });
