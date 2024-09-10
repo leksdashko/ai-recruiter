@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { styles } from "../styles";
-import RecruiterAvatar from "../components/Avatar/RecruiterAvatar";
+import RecruiterAvatar from "../components/Avatar/RecruiterAvatar"; 
 
 const HomePage = () => {
 	const location = useLocation();
-  const { backJobDescription } = location.state;
+  const { backJobDescription = '' } = location.state || {};
 
   const [jobDescription, setJobDescription] = useState(backJobDescription);
   const [errorMessage, setErrorMessage] = useState('');
+	const [language, setLanguage] = useState('en-US');
+	
   const navigate = useNavigate();
 
   const handleStart = (e) => {
@@ -63,6 +65,21 @@ const HomePage = () => {
 							Start Interview
 						</button>
 					</div>
+				</div>
+
+				<div>
+					<label htmlFor="language">Select Language: </label>
+					<select
+						id="language"
+						value={language}
+						onChange={(e) => setLanguage(e.target.value)}
+					>
+						<option value="en-US">English (US)</option>
+						<option value="es-ES">Spanish (Spain)</option>
+						<option value="fr-FR">French (France)</option>
+						<option value="de-DE">German (Germany)</option>
+						{/* Add more languages as needed */}
+					</select>
 				</div>
 			</div>
 		</div>
