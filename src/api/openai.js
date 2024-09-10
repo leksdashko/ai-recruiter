@@ -1,5 +1,5 @@
-const OPENAI_API_KEY = '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';
-const OPENAI_API_URL = 'https://api.openai.com/v1/completions';
+const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY;
+const OPENAI_API_URL = import.meta.env.OPENAI_API_URL;
 
 const handleError = (response) => {
   if (response.status === 429) {
