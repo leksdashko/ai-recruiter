@@ -1,4 +1,5 @@
-
+const OPENAI_API_KEY = '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';
+const OPENAI_API_URL = 'https://api.openai.com/v1/completions';
 
 const handleError = (response) => {
   if (response.status === 429) {
@@ -21,7 +22,7 @@ export const sendJobDescriptionToOpenAI = async (jobDescription) => {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        prompt: `Analyze this job description and ask the candidate relevant questions: ${jobDescription}`,
+        prompt: `Analyze this job description and you being the AI Interviewer ask the candidate relevant questions: ${jobDescription}`,
         max_tokens: 150,
       }),
     });
