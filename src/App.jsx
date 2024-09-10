@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Updated for 
 import HomePage from './pages/HomePage';
 import InterviewPage from './pages/InterviewPage';
 import SummaryPage from './pages/SummaryPage';
-import { styles } from "./styles";
 
 const App = () => {
 	return (

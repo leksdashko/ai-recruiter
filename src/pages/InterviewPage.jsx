@@ -8,11 +8,15 @@ import { sendJobDescriptionToOpenAI } from '../api/openai';
 
 const InterviewPage = () => {
   const location = useLocation();
-  const { jobDescription } = location.state;
+  const { jobDescription, language } = location.state || {};
 	const [hasError, setError] = useState(false);
 	const navigate = useNavigate();
 
   const { messages, sendMessage, addMessage } = useInterviewFlow();
+
+	useEffect(() => {
+		if(!jobDescription) return navigate('/');
+	},[]);
 
   useEffect(() => {
     const analyzeJobDescription = async () => {
@@ -32,7 +36,7 @@ const InterviewPage = () => {
   }, [jobDescription, addMessage]);
 
 	const goBack = () => {
-		navigate('/', { state: { backJobDescription: jobDescription } });
+		return navigate('/', { state: { backJobDescription: jobDescription } });
   };
 
   return (
@@ -44,7 +48,7 @@ const InterviewPage = () => {
 				<div className="chat-wrapper">
 					<div className="">
 						<ChatBox messages={messages} />
-						<MicInput onSend={sendMessage} />
+						<MicInput onSend={sendMessage} language={language} />
 					</div>
 				</div>
 			</div>

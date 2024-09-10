@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
-const MicInput = ({ onSend }) => {
+const MicInput = ({ onSend, language }) => {
   const [isListening, setIsListening] = useState(false);
+  const [timeoutId, setTimeoutId] = useState(null);
   const { transcript, resetTranscript } = useSpeechRecognition();
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -11,17 +12,39 @@ const MicInput = ({ onSend }) => {
 
   const handleStartListening = () => {
     setIsListening(true);
-    resetTranscript(); // Reset the transcript on new recording
-    SpeechRecognition.startListening({ continuous: true });
+    resetTranscript();
+    SpeechRecognition.startListening({ continuous: true, language });
+    startTranscriptTimer();
   };
 
   const handleStopListening = () => {
-		setIsListening(false);
-		SpeechRecognition.stopListening();
-		if (transcript && transcript.trim()) {
-			onSend(transcript);
-		}
-	};
+    setIsListening(false);
+    SpeechRecognition.stopListening();
+    if (transcript && transcript.trim()) {
+      onSend(transcript);
+    }
+    clearTimeout(timeoutId);
+  };
+
+  const startTranscriptTimer = () => {
+    clearTimeout(timeoutId);
+    
+    const id = setTimeout(() => {
+      return handleStopListening();
+    }, 3000);
+
+    setTimeoutId(id);
+  };
+
+  useEffect(() => {
+    if (isListening) {
+      startTranscriptTimer();
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [transcript]);
 
   return (
     <div className="mic-input">
@@ -31,7 +54,6 @@ const MicInput = ({ onSend }) => {
       >
         {isListening ? 'Stop Recording' : 'Start Recording'}
       </button>
-      <p>{transcript}</p>
     </div>
   );
 };
