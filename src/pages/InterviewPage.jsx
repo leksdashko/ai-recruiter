@@ -24,7 +24,8 @@ const InterviewPage = () => {
   useEffect(() => {
     const analyzeJobDescription = async () => {
       try {
-        const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
+        // const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
+				const aiResponse = 'Hi, I am your interviewer';
         addMessage({ text: aiResponse, sender: 'ai' });
       } catch (error) {
 				setError(true);
