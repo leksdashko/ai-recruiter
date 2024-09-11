@@ -36,6 +36,13 @@ const HomePage = () => {
 		}
   };
 
+	const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleStart(e);
+    }
+  };
+
   return (
     <div className={`absolute inset-0 top-[75px]  max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}>
 			<Preloader />
@@ -60,6 +67,7 @@ const HomePage = () => {
 							placeholder="Enter job description"
 							value={jobDescription}
 							onChange={(e) => setJobDescription(e.target.value)}
+							onKeyDown={handleKeyPress}
 							rows="7"
 							className="w-full" />
 						
