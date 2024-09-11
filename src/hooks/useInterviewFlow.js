@@ -13,9 +13,9 @@ const useInterviewFlow = (onAISuccess) => {
     addMessage({ text: userMessage, sender: 'user' });
 
     try {
-      // const aiResponse = await sendMessageToOpenAI(userMessage);
+      const aiResponse = await sendMessageToOpenAI(userMessage);
 
-			const aiResponse = 'It is the response from AI';
+			// const aiResponse = 'It is the response from AI';
 
 			generateVoice(aiResponse, () => {
 				addMessage({ text: aiResponse, sender: 'ai' });

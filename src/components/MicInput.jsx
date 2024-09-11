@@ -7,7 +7,7 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
   const [isListening, setIsListening] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const { transcript, resetTranscript } = useSpeechRecognition();
-	const timeoutSeconds = process.env.RECORDING_TIMEOUT || 2;
+	const timeoutSeconds = 3;
 	const navigate = useNavigate();
 	const query = useQuery();
 
@@ -56,7 +56,8 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
   };
 
 	const makeSummary = () => {
-		handleStopListening();
+		setIsListening(false);
+    SpeechRecognition.stopListening();
 
   	const id = query.get('id');
 

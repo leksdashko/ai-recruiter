@@ -1,5 +1,5 @@
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const OPENAI_API_URL = process.env.OPENAI_API_URL;
+const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+const OPENAI_API_URL = process.env.REACT_APP_OPENAI_API_URL;
 
 const handleError = (response) => {
   if (response.status === 429) {
@@ -22,7 +22,7 @@ export const sendJobDescriptionToOpenAI = async (jobDescription) => {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        prompt: `Analyze this job description and you being the AI Interviewer ask the candidate relevant questions: ${jobDescription}`,
+				messages: [{"role": "user", "content": "Let's imagine that you are real interviewer and you must nalyze this job description ask the candidate relevant questions. Ask questions one by one. Wait the user answer to ask next question: " + jobDescription}],
         max_tokens: 150,
       }),
     });
@@ -32,7 +32,7 @@ export const sendJobDescriptionToOpenAI = async (jobDescription) => {
     }
 
     const data = await response.json();
-    return data.choices?.[0]?.text || 'No response from AI.';
+    return data.choices?.[0]?.message?.content || 'No response from AI.';
   } catch (error) {
     console.error('Error sending job description to OpenAI:', error);
     throw error;
@@ -49,7 +49,7 @@ export const sendMessageToOpenAI = async (message) => {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        prompt: `Continue the conversation: ${message}`,
+				messages: [{"role": "user", "content": "Continue the conversation: " + message}],
         max_tokens: 150,
       }),
     });
@@ -59,7 +59,7 @@ export const sendMessageToOpenAI = async (message) => {
     }
 
     const data = await response.json();
-    return data.choices?.[0]?.text || 'No response from AI.';
+    return data.choices?.[0]?.message?.content || 'No response from AI.';
   } catch (error) {
     console.error('Error sending message to OpenAI:', error);
     throw error;

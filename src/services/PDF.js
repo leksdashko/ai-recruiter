@@ -1,4 +1,4 @@
-import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import generatePDF, { Margin } from 'react-to-pdf';
 
 const optionsDefault = {
    page: {

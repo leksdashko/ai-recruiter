@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const LABS_API_KEY = process.env.LABS_API_KEY;
+const LABS_API_KEY = process.env.REACT_APP_LABS_API_KEY;
 
 export const generateVoicee = async (text) => {
   const response = await axios.post('https://api.11labs.io/v1/text-to-speech', {
@@ -34,15 +34,15 @@ export const generateVoice = async (text, callback) => {
 	};
 
 	try {
-		// const response = await axios.post(`${baseUrl}/${voiceId}`, requestBody, {
-		// 	headers,
-		// 	responseType: "blob",
-		// });
+		const response = await axios.post(`${baseUrl}/${voiceId}`, requestBody, {
+			headers,
+			responseType: "blob",
+		});
 
-		const response = {
-			data: {},
-			status: 404
-		}
+		// const response = {
+		// 	data: {},
+		// 	status: 404
+		// }
 
 		if (response.status === 200) {
 			const audio = new Audio(URL.createObjectURL(response.data));

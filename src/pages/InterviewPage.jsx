@@ -18,7 +18,6 @@ const InterviewPage = () => {
   const interviewId = query.get('id');
   const { jobDescription, language } = location.state || {};
 	const [hasError, setError] = useState(false);
-	const [isLoading, setLoading] = useState(true);
 	const navigate = useNavigate();
   const micRef = useRef();
 
@@ -27,8 +26,7 @@ const InterviewPage = () => {
 
     const analyzeJobDescription = async () => {
       try {
-        // const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
-				const aiResponse = 'Hi, I am your interviewer';
+        const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
 
 				generateVoice(aiResponse, () => {
 					addMessage({ text: aiResponse, sender: 'ai' });
@@ -50,7 +48,6 @@ const InterviewPage = () => {
 
 	const { messages, sendMessage, addMessage } = useInterviewFlow(() => {
     micRef.current.startListening();
-		console.log('start listening');
   });
 
 	if(!interviewId || !uuidValidate(interviewId)){

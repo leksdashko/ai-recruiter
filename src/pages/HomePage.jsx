@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { styles } from "../styles";
 import RecruiterAvatar from "../components/Avatar/RecruiterAvatar"; 
-import { generateVoice } from '../api/11labs';
 import { v4 as uuid } from 'uuid';
 
 import SpeechRecognition from 'react-speech-recognition';
@@ -12,15 +11,10 @@ import Preloader from '../components/Preloader';
 const HomePage = () => {
 	const location = useLocation();
   const { backJobDescription = '' } = location.state || {};
-	const [isLoading, setLoading] = useState(true);
   const [jobDescription, setJobDescription] = useState(backJobDescription);
   const [errorMessage, setErrorMessage] = useState('');
 	
   const navigate = useNavigate();
-
-	useEffect(() => {
-    setLoading(false);
-  }, []);
 
   const handleStart = (e) => {
     e.preventDefault();
