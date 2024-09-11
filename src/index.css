@@ -182,6 +182,17 @@ textarea:focus {
 .button-done:hover {
 	background: #c2c8f9;
 }
+.button-pdf {
+	background: #d2d6fb;
+	border: 1px solid #a7aee9;
+	color: #5f63c8;
+	font-weight: 600;
+	width: auto;
+	padding: 15px 50px;
+}
+.button-pdf:hover {
+	background: #c2c8f9;
+}
 .mic-input .button.button-listening{
 	background: rgb(244 243 255);
 	border: 2px solid #f6f5ff;

@@ -34,10 +34,15 @@ export const generateVoice = async (text, callback) => {
 	};
 
 	try {
-		const response = await axios.post(`${baseUrl}/${voiceId}`, requestBody, {
-			headers,
-			responseType: "blob",
-		});
+		// const response = await axios.post(`${baseUrl}/${voiceId}`, requestBody, {
+		// 	headers,
+		// 	responseType: "blob",
+		// });
+
+		const response = {
+			data: {},
+			status: 404
+		}
 
 		if (response.status === 200) {
 			const audio = new Audio(URL.createObjectURL(response.data));
@@ -47,8 +52,10 @@ export const generateVoice = async (text, callback) => {
 			audio.play();
 		} else {
 			console.error("Error: Unable to stream audio.");
+			callback();
 		}
 	} catch (error) {
 		console.error(error);
+		callback();
 	}
 }

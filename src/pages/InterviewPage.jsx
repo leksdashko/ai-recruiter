@@ -1,14 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import ChatBox from '../components/ChatBox';
 import MicInput from '../components/MicInput';
 import RecruiterAvatar from '../components/Avatar/RecruiterAvatar';
 import useInterviewFlow from '../hooks/useInterviewFlow';
 import { sendJobDescriptionToOpenAI } from '../api/openai';
 import { generateVoice } from '../api/11labs';
+import { validate as uuidValidate } from 'uuid';
+import ErrorPage from './ErrorPage';
+import useQuery from '../hooks/useQuery';
+
 
 const InterviewPage = () => {
   const location = useLocation();
+	const query = useQuery();
+  const interviewId = query.get('id');
   const { jobDescription, language } = location.state || {};
 	const [hasError, setError] = useState(false);
 	const navigate = useNavigate();
@@ -18,11 +24,13 @@ const InterviewPage = () => {
     micRef.current.startListening();
   });
 
+	if(!interviewId || !uuidValidate(interviewId)){
+		return <ErrorPage error="404" />;
+	}
+
 	useEffect(() => {
 		if (!jobDescription) return navigate('/');
-	}, []);
 
-  useEffect(() => {
     const analyzeJobDescription = async () => {
       try {
         // const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
@@ -58,7 +66,7 @@ const InterviewPage = () => {
 
 				<div className="chat-wrapper">
 					<ChatBox messages={messages} />
-					<MicInput ref={micRef} onSend={sendMessage} language={language} />
+					<MicInput ref={micRef} onSend={sendMessage} messages={messages} language={language} />
 				</div>
 			</div>
 		</div>
