@@ -10,7 +10,7 @@ const SummaryReport = ({ report }) => {
 
   return (
 		<div className={`pt-[50px] max-w-7xl mx-auto ${styles.paddingX}`}>
-			<button className="button button-pdf mb-10" onClick={() => createPDF(targetRef, {filename: pdfName})}>Download PDF</button>
+			<button className="button button-pdf my-10" onClick={() => createPDF(targetRef, {filename: pdfName})}>Download PDF</button>
          
 			<div ref={targetRef}>
 				<h1 className="text-[#000] mb-5">

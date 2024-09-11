@@ -81,10 +81,57 @@
   }
 }
 
-/* for smart-phone */
-@media only screen and (max-width: 600px) {
-  .ai-recruiter-wrapper svg {
-    width: fit-content;
-    margin: 10px;
-  }
+@media only screen and (max-width: 992px) {
+	.interview-page .ai-recruiter-wrapper {
+		position: fixed !important;
+		left: 20% !important;
+		margin-top: -100px !important;
+	}
+	.go-back-btn {
+    left: 20px !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+  .ai-recruiter-wrapper {
+		position: fixed;
+		width: 100px;
+		height: 100px;
+		top: 0;
+		right: 0;
+	}
+	.interview-page .ai-recruiter-wrapper {
+		left: auto !important;
+		top: 0 !important;
+		margin-top: 0 !important;
+		right: 0;
+		z-index: 100;
+	}
+	.ai-recruiter-wrapper .circle{
+		height: 60px;
+		width: 60px;
+		margin-top: -30px;
+		margin-left: -30px;
+	}
+	.ai-recruiter{
+		width: 100px;
+		height: 100px;
+	}
+	.chat-wrapper {
+    height: 100vh !important;
+		width: 100%;
+    margin-top: 0 !important;
+		padding-bottom: 25px;
+    padding-left: 50px;
+	}
+	.mic-input {
+    position: static !important;
+    transform: none !important;
+	}
+}
+@media only screen and (max-width: 440px) {
+  .chat-wrapper {
+    padding-left: 20px;
+		padding-right: 20px !important;
+	}
 }

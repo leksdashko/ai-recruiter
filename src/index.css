@@ -4,13 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+body, html {
+	background: #eaecff;
+	color: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
-  color-scheme: dark;
 }
 
 .hash-span {
@@ -150,6 +154,7 @@ textarea:focus {
 	top: 0;
 	left: 50px;
 	font-size: 12px;
+	z-index: 100;
 }
 .go-back-btn:hover {
 	border-color: transparent;

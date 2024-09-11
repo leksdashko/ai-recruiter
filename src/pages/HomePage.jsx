@@ -55,8 +55,8 @@ const HomePage = () => {
 					Hi, I'm <span className='text-[#868af2] font-black'>AI Interviewer</span>
 				</h1>
 				<p className={`${styles.heroSubText} mt-2 text-black-100 mb-10`}>
-					I simulate an interview with the <br className='sm:block hidden' />
-					candidates
+					Real-Time Interviews<br className='sm:block hidden' />
+					for Smarter Recruitment
 				</p>
 
 				<div className="flex justify-between">

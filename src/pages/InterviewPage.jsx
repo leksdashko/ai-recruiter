@@ -24,6 +24,7 @@ const InterviewPage = () => {
 
   const { messages, sendMessage, addMessage } = useInterviewFlow(() => {
     micRef.current.startListening();
+		console.log('start listening');
   });
 
 	if(!interviewId || !uuidValidate(interviewId)){
@@ -37,8 +38,6 @@ const InterviewPage = () => {
       try {
         // const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
 				const aiResponse = 'Hi, I am your interviewer';
-
-				setLoading(false);
 
 				generateVoice(aiResponse, () => {
 					addMessage({ text: aiResponse, sender: 'ai' });
@@ -62,12 +61,9 @@ const InterviewPage = () => {
 		return navigate('/', { state: { backJobDescription: jobDescription } });
   };
 
-	if(isLoading){
-		return <Preloader />
-	}
-
   return (
 		<div className={`absolute inset-0 top-0 max-w-7xl mx-auto flex flex-row items-start gap-5`}>
+			<Preloader />
 			<button className="go-back-btn mt-5" onClick={goBack}>Go Back</button>
 			<div className="interview-page">
 				<RecruiterAvatar />
