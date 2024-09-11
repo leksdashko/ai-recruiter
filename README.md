@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+AI Interviewer - Real-Time Interviews for Smarter Recruitment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an AI-driven application designed to automate real-time interviews, allowing recruiters to evaluate candidates more efficiently.
 
-## Available Scripts
+First Steps
+Run `npm install` to install all the dependencies.
 
+Copy .env.example and add your API keys for OpenAI and 11Labs:
+
+REACT_APP_OPENAI_API_KEY='your_openai_key'
+REACT_APP_LABS_API_KEY='your_elevenlabs_key'
+
+Available Scripts
 In the project directory, you can run:
 
-### `npm start`
+npm start
+Runs the app in development mode.
+Open http://localhost:3000 to view it in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm run build
+Builds the app for production to the build folder.
+It bundles React in production mode and optimizes the build for the best performance.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm run test
+Launches the test runner in the interactive watch mode.
 
-### `npm test`
+npm run eject
+This will expose the complete configuration files to allow for customization.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Features
+- AI-Driven Interviews: Automatically generates interview questions based on job descriptions.
+- Voice Input: Real-time speech recognition using the Web Speech API for a seamless experience.
+- Real-Time Feedback: Get immediate analysis of candidate responses.
+- PDF Export: Export interview data as PDFs.
+- Multilingual Support: Conduct interviews in multiple languages by adjusting the settings.
 
-### `npm run build`
+Folder Structure
+The project structure is as follows:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+├── public                   # Public directory (static assets)
+├── src                      # Source files
+│   ├── api                  # API requests (OpenAI, 11Labs)
+│   ├── components           # Reusable UI components
+│   ├── hooks                # Custom React hooks
+│   ├── pages                # Main pages (HomePage, InterviewPage)
+│   ├── styles               # Global CSS and Tailwind configuration
+│   ├── App.js               # Main app component
+│   ├── index.js             # Entry point for React app
+├── .env.example             # Example environment configuration file
+├── package.json             # Project dependencies and scripts
+└── README.md                # Project description and instructions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Environment Variables
+Ensure you add the following environment variables in the .env file:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+REACT_APP_OPENAI_API_KEY='your_openai_key'
+REACT_APP_LABS_API_KEY='your_elevenlabs_key'
 
-### `npm run eject`
+Tech Stack
+- React: Frontend framework
+- Tailwind CSS: Utility-first CSS for styling
+- React Speech Recognition: Voice recognition with the Web Speech API
+- Axios: HTTP requests to OpenAI and 11Labs
+- OpenAI API: AI-generated questions and responses
+- 11Labs API: Voice synthesis
+- React Router: Navigation and routing between pages
+- UUID: Unique identifiers for interviews
+- dotenv: Managing environment variables
+- React-to-PDF: Exporting data to PDF format
+- PostCSS & Autoprefixer: CSS processing and optimization
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Deployment
+Build the app using `npm run build` and deploy the contents of the build folder to any hosting service, or use platforms like Vercel, Netlify, or Heroku for quick deployment.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+License
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Author
+Created by [Your Name]. For inquiries, contact [Your Email].
