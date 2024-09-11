@@ -29,7 +29,7 @@ export const sendJobDescriptionToOpenAI = async (jobDescription) => {
         messages: [
           {
             role: 'system',
-            content: `You are a professional job interviewer conducting an interview for a role based on the provided job description. Start by greeting the candidate. Then, ask questions relevant to the job description, focusing on key skills, experience, and responsibilities outlined. Ask one question at a time and wait for the candidate to respond before proceeding to the next question. Provide follow-up questions or clarifications if needed, and maintain a professional yet friendly tone throughout the conversation. Ensure the interview is structured, covering technical and leadership aspects, as well as any specific qualifications mentioned in the job description.`
+            content: `You are a professional job interviewer conducting an interview for a role based on the provided job description. Start by greeting the candidate. Then, ask questions relevant to the job description, focusing on key skills, experience, and responsibilities outlined. Ask one question at a time and wait for the candidate to respond before proceeding to the next question. Provide follow-up questions or clarifications if needed, and maintain a professional yet friendly tone throughout the conversation. Ensure the interview is structured, covering technical and leadership aspects, as well as any specific qualifications mentioned in the job description. Keep your responses concise and no longer than 200 characters.`
           },
           {
             role: 'user',
@@ -63,10 +63,14 @@ export const sendMessageToOpenAI = async (message) => {
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        messages: [
+				messages: [
+          {
+            role: 'system',
+            content: `Continue asking questions relevant to the user answers, focusing on key skills, experience, and responsibilities outlined. Ask one question at a time and wait for the candidate to respond before proceeding to the next question. Provide follow-up questions or clarifications if needed, and maintain a professional yet friendly tone throughout the conversation. Keep your responses concise and no longer than 200 characters.`
+          },
           {
             role: 'user',
-            content: `Continue the conversation: ${message}`
+            content: `Here is the user answer: ${message}`
           }
         ],
         max_tokens: 150,
