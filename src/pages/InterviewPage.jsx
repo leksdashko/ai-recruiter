@@ -22,6 +22,19 @@ const InterviewPage = () => {
   const micRef = useRef();
 
 	useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      navigate('/', { state: { backJobDescription: jobDescription } });
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
+	useEffect(() => {
 		if (!jobDescription) return navigate('/');
 
     const analyzeJobDescription = async () => {

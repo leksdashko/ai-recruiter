@@ -107,18 +107,21 @@
 		right: 0;
 		z-index: 100;
 	}
-	.ai-recruiter-wrapper .circle{
+	.ai-recruiter-wrapper .circle {
 		height: 60px;
 		width: 60px;
 		margin-top: -30px;
 		margin-left: -30px;
+		border: 2px solid #878af2;
+		border-radius: 50px;
 	}
 	.ai-recruiter{
 		width: 100px;
 		height: 100px;
+		display: none;
 	}
 	.chat-wrapper {
-    height: 100vh !important;
+    height: 100% !important;
 		width: 100%;
     margin-top: 0 !important;
 		padding-bottom: 25px;
