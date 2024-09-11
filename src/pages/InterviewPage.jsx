@@ -9,6 +9,7 @@ import { generateVoice } from '../api/11labs';
 import { validate as uuidValidate } from 'uuid';
 import ErrorPage from './ErrorPage';
 import useQuery from '../hooks/useQuery';
+import Preloader from '../components/Preloader';
 
 
 const InterviewPage = () => {
@@ -17,6 +18,7 @@ const InterviewPage = () => {
   const interviewId = query.get('id');
   const { jobDescription, language } = location.state || {};
 	const [hasError, setError] = useState(false);
+	const [isLoading, setLoading] = useState(true);
 	const navigate = useNavigate();
   const micRef = useRef();
 
@@ -35,6 +37,8 @@ const InterviewPage = () => {
       try {
         // const aiResponse = await sendJobDescriptionToOpenAI(jobDescription);
 				const aiResponse = 'Hi, I am your interviewer';
+
+				setLoading(false);
 
 				generateVoice(aiResponse, () => {
 					addMessage({ text: aiResponse, sender: 'ai' });
@@ -57,6 +61,10 @@ const InterviewPage = () => {
 	const goBack = () => {
 		return navigate('/', { state: { backJobDescription: jobDescription } });
   };
+
+	if(isLoading){
+		return <Preloader />
+	}
 
   return (
 		<div className={`absolute inset-0 top-0 max-w-7xl mx-auto flex flex-row items-start gap-5`}>

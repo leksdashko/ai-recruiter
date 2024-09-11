@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { styles } from "../styles";
@@ -7,15 +7,20 @@ import { generateVoice } from '../api/11labs';
 import { v4 as uuid } from 'uuid';
 
 import SpeechRecognition from 'react-speech-recognition';
+import Preloader from '../components/Preloader';
 
 const HomePage = () => {
 	const location = useLocation();
   const { backJobDescription = '' } = location.state || {};
-
+	const [isLoading, setLoading] = useState(true);
   const [jobDescription, setJobDescription] = useState(backJobDescription);
   const [errorMessage, setErrorMessage] = useState('');
 	
   const navigate = useNavigate();
+
+	useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const handleStart = (e) => {
     e.preventDefault();
@@ -39,6 +44,7 @@ const HomePage = () => {
 
   return (
     <div className={`absolute inset-0 top-[75px]  max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}>
+			<Preloader />
 			<div className='flex flex-col justify-center items-center mt-5'>
 				<div className='w-5 h-5 rounded-full bg-[#868af2]' />
 				<div className='w-1 sm:h-80 h-40 violet-gradient' />

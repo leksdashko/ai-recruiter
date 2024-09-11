@@ -1,11 +1,16 @@
 import './ai.css';
 
-const RecruiterAvatar = () => {
+const RecruiterAvatar = ({preloader = false}) => {
 	return (
-		<div className="ai-recruiter-wrapper">
+		<div className={`ai-recruiter-wrapper ${preloader ? 'mt-[-50px]' : ''}`}>
 			<div className="circle flex items-center justify-center">
 				<div className="w-20 h-20 flex items-center justify-center">
-						<span className="font-bold text-3xl text-black">m<span className="text-purple-500">.</span></span>
+					{preloader 
+					? 
+					<span className="text-sm text-[#8c91f5]">Loading...</span> 
+					:
+					<span className="font-bold text-3xl text-black">m<span className="text-purple-500">.</span></span>
+					}
 				</div>
 			</div>
 			<div className="ai-recruiter">
