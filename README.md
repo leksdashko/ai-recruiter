@@ -5,6 +5,10 @@ This project is an AI-driven application designed to automate real-time intervie
 
 ## First Steps
 
+Run `git clone https://github.com/leksdashko/ai-recruiter.git`
+
+`cd ai-recruiter`
+
 Ensure you have **Node.js** installed to run `npm`. You can download Node.js from [here](https://nodejs.org/).
 
 Run `npm install` to install all the dependencies.
