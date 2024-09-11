@@ -22,15 +22,6 @@ const InterviewPage = () => {
 	const navigate = useNavigate();
   const micRef = useRef();
 
-  const { messages, sendMessage, addMessage } = useInterviewFlow(() => {
-    micRef.current.startListening();
-		console.log('start listening');
-  });
-
-	if(!interviewId || !uuidValidate(interviewId)){
-		return <ErrorPage error="404" />;
-	}
-
 	useEffect(() => {
 		if (!jobDescription) return navigate('/');
 
@@ -56,6 +47,15 @@ const InterviewPage = () => {
 			analyzeJobDescription();
 		}
   }, []);
+
+	const { messages, sendMessage, addMessage } = useInterviewFlow(() => {
+    micRef.current.startListening();
+		console.log('start listening');
+  });
+
+	if(!interviewId || !uuidValidate(interviewId)){
+		return <ErrorPage error="404" />;
+	}
 
 	const goBack = () => {
 		return navigate('/', { state: { backJobDescription: jobDescription } });

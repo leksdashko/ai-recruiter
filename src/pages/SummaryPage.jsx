@@ -13,15 +13,15 @@ const SummaryPage = () => {
 	const query = useQuery();
   const interviewId = query.get('id');
 
-	if(!interviewId || !uuidValidate(interviewId)){
-		return <ErrorPage error="404" />;
-	}
-
 	useEffect(() => {
     if (!report) {
       navigate('/');
     }
   }, [report, navigate]);
+
+	if(!interviewId || !uuidValidate(interviewId)){
+		return <ErrorPage error="404" />;
+	}
 
   return (
 		<div className={`relative`}>

@@ -1,5 +1,5 @@
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-const OPENAI_API_URL = import.meta.env.VITE_OPENAI_API_URL;
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_API_URL = process.env.OPENAI_API_URL;
 
 const handleError = (response) => {
   if (response.status === 429) {

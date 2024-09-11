@@ -7,20 +7,29 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
   const [isListening, setIsListening] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
   const { transcript, resetTranscript } = useSpeechRecognition();
-	const timeoutSeconds = import.meta.env.VITE_RECORDING_TIMEOUT || 2;
+	const timeoutSeconds = process.env.RECORDING_TIMEOUT || 2;
 	const navigate = useNavigate();
 	const query = useQuery();
 
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return <div>Your browser does not support speech recognition.</div>;
-  }
-	
-  useImperativeHandle(ref, () => ({
+	useImperativeHandle(ref, () => ({
     startListening() {
       handleStartListening();
     }
   }));
 
+	useEffect(() => {
+    if (isListening && transcript.length > 0) {
+      startTranscriptTimer();
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [transcript]);
+
+  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+    return <div>Your browser does not support speech recognition.</div>;
+  }
   const handleStartListening = () => {
     setIsListening(true);
     resetTranscript();
@@ -53,16 +62,6 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
 
 		navigate('/summary?id=' + id, { state: { report: {id, messages} } });
 	}
-
-  useEffect(() => {
-    if (isListening && transcript.length > 0) {
-      startTranscriptTimer();
-    }
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [transcript]);
 	
 	return (
 		<div className={`mic-input mt-[30px] ${!isListening ? 'cushidden' : ''}`}>

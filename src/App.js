@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Updated for v6
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import InterviewPage from './pages/InterviewPage';
 import SummaryPage from './pages/SummaryPage';
