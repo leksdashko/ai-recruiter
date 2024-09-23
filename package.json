@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@uiw/react-textarea-code-editor": "^3.0.2",
     "ajv": "^8.17.1",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
@@ -10,6 +11,7 @@
     "postcss": "^8.4.45",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
     "react-speech-recognition": "^3.10.0",

@@ -21,7 +21,14 @@ const SummaryReport = ({ report }) => {
 					{messages.map((msg, index) => (
 						<div key={index} className={`message msg-${msg.sender} py-2`}>
 							<span className={`text-xl ${msg.sender === 'ai' ? 'text-[#6367dd]' : 'text-[#929292]'}`}>{msg.sender === 'ai' ? 'AI Interviewer' : 'User'}</span>
+							{msg.sender !== 'ai' && msg.text.includes('|code|') ? (
+							<>
+								<p className="text-[#000]">{msg.text.split('|code|')[0]}</p>
+								<p className="text-[#fcfcff] bg-[#5a5a5a] p-3 mt-3">{msg.text.split('|code|')[1]}</p>
+							</>
+							) : (
 							<p className="text-[#000]">{msg.text}</p>
+							)}
 						</div>
 					))}	
 				</div>

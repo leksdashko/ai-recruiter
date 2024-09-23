@@ -7,6 +7,7 @@ import { v4 as uuid } from 'uuid';
 
 import SpeechRecognition from 'react-speech-recognition';
 import Preloader from '../components/Preloader';
+import UploadFile from '../components/DrugNDrop/UploadFile';
 
 const HomePage = () => {
 	const location = useLocation();
@@ -16,25 +17,43 @@ const HomePage = () => {
 	
   const navigate = useNavigate();
 
-  const handleStart = (e) => {
-    e.preventDefault();
+//   const handleStart = (e) => {
+//     e.preventDefault();
 
-		if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-			setErrorMessage('Your browser does not support speech recognition. Please use Google Chrome or another supported browser');
-		}else{
-			if (jobDescription.trim().length === 0) {
-				setErrorMessage('Job description cannot be empty.');
-			} else if (jobDescription.trim().length < 200) {
-				setErrorMessage('Job description must be at least 200 characters long.');
-			} else {
-				setErrorMessage('');
+// 		if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+// 			setErrorMessage('Your browser does not support speech recognition. Please use Google Chrome or another supported browser');
+// 		}else{
+// 			if (jobDescription.trim().length === 0) {
+// 				setErrorMessage('Job description cannot be empty.');
+// 			} else if (jobDescription.trim().length < 200) {
+// 				setErrorMessage('Job description must be at least 200 characters long.');
+// 			} else {
+// 				setErrorMessage('');
 
-				const id = uuid();
+// 				const id = uuid();
 				
-				navigate('/interview?id=' + id, { state: { jobDescription, language: 'en-US' } });
-			}
-		}
-  };
+// 				navigate('/interview?id=' + id, { state: { jobDescription, language: 'en-US' } });
+// 			}
+// 		}
+//   };
+
+const handleStart = () => {
+
+	if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+		setErrorMessage('Your browser does not support speech recognition. Please use Google Chrome or another supported browser');
+	}else{
+		setErrorMessage('');
+
+		const id = uuid();
+
+		fetch('/jobDescription.txt')
+			  .then(response => response.text())
+			  .then(data => {
+				navigate('/interview?id=' + id, { state: { jobDescription: data, language: 'en-US' } });
+			  })
+			  .catch(error => console.error('Error reading file:', error));
+	}
+};
 
 	const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -47,13 +66,13 @@ const HomePage = () => {
     <div className={`absolute inset-0 top-[75px]  max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}>
 			<Preloader />
 			<div className='flex flex-col justify-center items-center mt-5'>
-				<div className='w-5 h-5 rounded-full bg-[#868af2]' />
-				<div className='w-1 sm:h-80 h-40 violet-gradient' />
+				<div className='w-5 h-5 rounded-full bg-[#3f57bb]' />
+				<div className='w-1 sm:h-80 h-40 blue-gradient' />
 			</div>
 
 			<div>
 				<h1 className={`${styles.heroHeadText}`}>
-					Hi, I'm <span className='text-[#868af2] font-black'>AI Interviewer</span>
+					Hi, I'm <span className='text-[#3f57bb] font-black'>AI Interviewer</span>
 				</h1>
 				<p className={`${styles.heroSubText} mt-2 text-black-100 mb-10`}>
 					Real-Time Interviews<br className='sm:block hidden' />
@@ -62,7 +81,8 @@ const HomePage = () => {
 
 				<div className="flex justify-between">
 					<RecruiterAvatar />
-					<div className="w-[100%] h-[300px] ml-5">
+					<UploadFile onUpload={handleStart} />
+					{/* <div className="w-[100%] h-[300px] ml-5">
 						<textarea
 							placeholder="Enter job description"
 							value={jobDescription}
@@ -81,7 +101,7 @@ const HomePage = () => {
 						>
 							Start Interview
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

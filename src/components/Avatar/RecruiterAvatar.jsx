@@ -1,4 +1,10 @@
 import './ai.css';
+import AwesomicLogo from './AwesomicLogo';
+
+const colors = {
+	default: '#eaecff',
+	awesomic: '#3f57bb'
+};
 
 const RecruiterAvatar = ({preloader = false}) => {
 	return (
@@ -7,9 +13,9 @@ const RecruiterAvatar = ({preloader = false}) => {
 				<div className="w-20 h-20 flex items-center justify-center">
 					{preloader 
 					? 
-					<span className="text-sm text-[#8c91f5]">Loading...</span> 
+					<span className={`text-sm text-[${colors.awesomic}]`}>Loading...</span> 
 					:
-					<span className="font-bold lg:text-3xl text-sm text-black">m<span className="text-purple-500">.</span></span>
+					<AwesomicLogo />
 					}
 				</div>
 			</div>
@@ -17,12 +23,12 @@ const RecruiterAvatar = ({preloader = false}) => {
 				<svg xmlns="http://www.w3.org/2000/svg" width="391" height="391" viewBox="0 0 391 391" fill="none">
 					<g id="ai">
 						<g id="main" filter="url(#filter0_i)">
-							<ellipse cx="195" cy="195.878" rx="137" ry="130" fill="#eaecff" />
+							<ellipse cx="195" cy="195.878" rx="137" ry="130" fill={colors.default} />
 						</g>
 						<g id="g" filter="url(#filter1_i)">
 							<path
 								d="M258.925 321.952C217.208 345.095 172.592 342.312 125.078 313.602C77.5637 284.893 55.7755 241.764 59.7134 184.217C63.6513 126.669 92.3392 89.9343 145.777 74.0127C199.215 58.0912 240.138 64.8972 288.549 94.4308C336.959 123.964 352.887 163.482 336.333 212.984C319.778 262.486 300.643 298.809 258.925 321.952Z"
-								fill="white" fillOpacity="0.01" />
+								fill="white" fillOpacity="0.05" />
 						</g>
 						<g id="f" filter="url(#filter2_i)">
 							<path

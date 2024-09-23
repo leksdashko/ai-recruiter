@@ -2,6 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef, useEffect } from 'rea
 import { useNavigate } from 'react-router-dom';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import useQuery from '../hooks/useQuery';
+import CodeEditor from '@uiw/react-textarea-code-editor/nohighlight';
 
 const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
   const [isListening, setIsListening] = useState(false);
@@ -10,12 +11,22 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
 	const timeoutSeconds = 3;
 	const navigate = useNavigate();
 	const query = useQuery();
+  const [code, setCode] = useState(
+    `function add(a, b) {\n  return a + b;\n}`
+  );
 
 	useImperativeHandle(ref, () => ({
     startListening() {
       handleStartListening();
     }
   }));
+
+  useEffect(() => {
+    // setIsListening(false);
+    SpeechRecognition.stopListening();
+
+    clearTimeout(timeoutId);
+  }, [code]);
 
 	useEffect(() => {
     if (isListening && transcript.length > 0) {
@@ -63,8 +74,27 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
 
 		navigate('/summary?id=' + id, { state: { report: {id, messages} } });
 	}
+
+  const handleCodeButton = () => {
+    
+    let message = '';
+
+    if (transcript && transcript.trim()) {
+      message += transcript;
+    }
+
+    if(code){
+      message += '|code|' + code;
+    }
+
+    if(message){
+      setIsListening(false);
+      onSend(message);
+    }
+  }
 	
 	return (
+    <>
 		<div className={`mic-input mt-[30px] ${!isListening ? 'cushidden' : ''}`}>
 			<button
 				className="button button-listening listening"
@@ -80,6 +110,25 @@ const MicInput = forwardRef(({ onSend, messages, language = 'en-US' }, ref) => {
 				Done answering? Continue
 			</button>
 		</div>
+
+    {isListening && (
+    <div className="code-wrapper">
+      <div className="add-code">
+        <CodeEditor
+          value={code}
+          language="js"
+          placeholder="Please enter JS code."
+          onChange={(evn) => setCode(evn.target.value)}
+          padding={15}
+          style={{
+            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+          }}
+        />
+      </div>
+      
+      <button onClick={handleCodeButton} className="button bg-[#161b22] hover:bg-[#2a384b] mt-3">Send Answer</button>
+    </div>)}
+    </>
 	);
 });
 

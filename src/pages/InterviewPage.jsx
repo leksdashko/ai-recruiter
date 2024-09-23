@@ -24,7 +24,7 @@ const InterviewPage = () => {
 	useEffect(() => {
     const handleBeforeUnload = (e) => {
       e.preventDefault();
-      navigate('/', { state: { backJobDescription: jobDescription } });
+    //   navigate('/', { state: { backJobDescription: jobDescription } });
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -35,7 +35,7 @@ const InterviewPage = () => {
   }, []);
 
 	useEffect(() => {
-		if (!jobDescription) return navigate('/');
+		// if (!jobDescription) return navigate('/');
 
     const analyzeJobDescription = async () => {
       try {

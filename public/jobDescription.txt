@@ -1,0 +1,47 @@
+Senior Full Stack Developer
+
+About Awesomic:
+
+Awesomic is a rapidly expanding startup with a team of over 120 professionals, recognized as the fastest growing startup in Ukraine. With significant investments from Google, Y Combinator, Michael Siebel of Twitch, and Ragnar Sass of Pipedrive, Awesomic is on the path to becoming the next unicorn
+
+
+Role Summary:
+
+We are seeking a talented Senior Full-Stack Developer to join our dynamic team. You will have the opportunity to lead the technical development of various exciting projects (including a marketplace app, a cutting-edge platform for designers, a SaaS app in the hiring space, and more). In this role, you will guide and manage middle developers, ensuring the successful delivery of high-quality solutions. Your expertise will be critical in driving our projects forward and shaping the future of our technology.
+
+
+Key Responsibilities:
+
+Lead and maintain web applications using PHP (Laravel) and React;
+Take early-stage technical leadership roles;
+Mentor middle developers and manage their contributions;
+Focus on high detail in UI/UX integration and performance;
+Manage complex application architectures and database interactions;
+Implement and uphold high-quality OOP practices and patterns.
+ 
+
+Skills and Qualifications:
+
+Over 5 years of full-stack development experience in PHP, Laravel, and React;
+Demonstrated ability to lead projects and manage development teams;
+Proficient in HTML5, CSS3, JavaScript, MySQL, and API integration;
+Strong skills in version control using Git;
+Expertise in managing complex application architectures and OOP;
+Experience in startups or personal projects is highly regarded.
+
+ 
+
+If you’re skilled in full-stack development with other technologies and eager to learn PHP, Laravel, and React, we’d love to have you on our team! 
+
+Benefits:
+
+You’ll join the coolest community of goal-driven people who love what they do and are ready to change the game with innovative decisions;
+You’ll have the opportunity to work closely with Roman Sevast and Stacy Pavlyshyna, Founders of Awesomic, YC alumni, and Forbes 30 Under 30 honorees;
+You’ll have unlimited prospects to develop as a professional;
+You’ll benefit from a mental health support program, a work laptop (MacBook), unlimited vacation days, coverage for courses and other learning activities, health insurance, and the ability to work in a hub in Warsaw, Kyiv, Lviv, or fully remote.
+ 
+
+While our primary stack includes PHP, Laravel, and React, we also value experience with other technologies such as Python, Node.js, Ruby, and front-end frameworks like Vue and Angular. We are open to candidates who have a strong foundation in these areas and are eager to learn and adapt to our stack quickly.
+
+About Awesomic
+Awesomic is a rapidly expanding startup with a team of over 120 professionals, recognized as the fastest-growing startup in Ukraine. With significant investments from Google, Y Combinator, Michael Siebel of Twitch, and Ragnar Sass of Pipedrive, Awesomic is on the path to becoming the next unicorn. We are dedicated to building a super app in the hiring space.
